@@ -25,9 +25,12 @@ class Todo extends Component{
     }
     componentDidMount() {
         this.setState({input:this.props.myValue})
-        
     }
-
+    componentDidUpdate(prevProps,prevState) {
+        if(prevProps.myValue!=this.props.myValue){
+            this.setState({input:this.props.myValue})
+        }
+    }   
     render() {
        
        

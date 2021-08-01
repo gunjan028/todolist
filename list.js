@@ -10,7 +10,11 @@ class List extends Component{
             
         this.setState({input:event.target.value})
     }
-
+    onKeyUp=(event)=> {
+        if (event.charCode === 13) {
+          this.addTodo()
+        }
+    }
     addTodo=()=>{
         this.setState({
             input:"",
@@ -18,7 +22,6 @@ class List extends Component{
         })
     }
     delItem=(index)=>{
-        console.log(index)
         let myList=[...this.state.todoList]
         myList.splice(index,1)
         this.setState({
@@ -27,8 +30,10 @@ class List extends Component{
 
     }
     saveItem=(index,input)=>{
+        let mySavVal=[...this.state.todoList]
+        mySavVal.splice(index,1,input)
         this.setState({
-            todoList:this.state.todoList.splice(index,1,input)
+            todoList:mySavVal
         })
     }
     render() {
@@ -36,7 +41,7 @@ class List extends Component{
         return (
             <div>
                 <div>
-                  <input type="text" value={this.state.input}  onChange={this.changeVal} placeholder="what do you want to do?"/>
+                  <input type="text" value={this.state.input}  onChange={this.changeVal} onKeyPress={this.onKeyUp} placeholder="what do you want to do?"/>
                   <button onClick={this.addTodo}>+</button>
                </div>
                <div>
