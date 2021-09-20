@@ -1,5 +1,6 @@
 import React,{ Component } from 'react';
 import Todo from './todo.js';
+
 class List extends Component{
 
     state={
@@ -14,12 +15,21 @@ class List extends Component{
         if (event.charCode === 13) {
           this.addTodo()
         }
+        
     }
     addTodo=()=>{
+        if(this.state.input==null||this.state.input=="")
+        {
+            alert("Please enter something")
+            return
+        }
+        else{
         this.setState({
             input:"",
             todoList: [...this.state.todoList,this.state.input]
         })
+    }
+        
     }
     delItem=(index)=>{
         let myList=[...this.state.todoList]
@@ -39,10 +49,10 @@ class List extends Component{
     render() {
         
         return (
-            <div>
+            <div class="todo">
                 <div>
-                  <input type="text" value={this.state.input}  onChange={this.changeVal} onKeyPress={this.onKeyUp} placeholder="what do you want to do?"/>
-                  <button onClick={this.addTodo}>+</button>
+                  <input class="input" type="text" value={this.state.input}  onChange={this.changeVal} onKeyPress={this.onKeyUp} placeholder="what do you want to do?"/>
+                  <button class="button" onClick={this.addTodo}>+</button>
                </div>
                <div>
                     {  

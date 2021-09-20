@@ -13,12 +13,24 @@ class Todo extends Component{
         this.setState({input:this.props.myValue})
         }
     }
+    onKeyUp=(event)=> {
+        if (event.charCode === 13) {
+          this.editVal()
+        }
+     
+    }
     editVal=()=> {
+        if(this.state.input==null||this.state.input=="")
+        {
+            alert("Please enter something")
+        }
+        else{
         if(!this.state.boxState)
         {
         this.props.editValue(this.props.myIndex,this.state.input)
         }
         this.setState({boxState:!this.state.boxState})
+        }
     }
     saveVal=(event)=> {
         this.setState({input:event.target.value})
@@ -35,10 +47,9 @@ class Todo extends Component{
        
        
         return <div>
-           
-            <input type="text" value={this.state.input} disabled={this.state.boxState} onChange={this.saveVal} />
-            <button onClick={this.delVal}>delete</button>
-            <button onClick={this.editVal}>{this.state.boxState?"edit":"save"}</button>
+            <input type="text" class="text"value={this.state.input} disabled={this.state.boxState} onKeyPress={this.onKeyUp} onChange={this.saveVal} />
+            <button class="delete" onClick={this.delVal}>delete</button>
+            <button class="edit"onClick={this.editVal}>{this.state.boxState?"edit":"save"}</button>
         </div>
     }
 }
